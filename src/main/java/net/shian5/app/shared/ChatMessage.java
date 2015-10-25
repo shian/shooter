@@ -9,12 +9,13 @@ import dontCare.gf.gae.gwtChannel.client.Message;
 public class ChatMessage implements Message{
     private String name;
     private String msg;
-    public ChatMessage() {
-    }
 
     public ChatMessage(String name, String msg) {
         this.name = name;
         this.msg = msg;
+    }
+
+    public ChatMessage() {
     }
 
     public String getName() {

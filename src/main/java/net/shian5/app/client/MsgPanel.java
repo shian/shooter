@@ -29,6 +29,7 @@ public class MsgPanel extends Composite {
     }
 
     private static MsgPanelUiBinder ourUiBinder = GWT.create(MsgPanelUiBinder.class);
+    private final ChannelServiceAsync channelService = GWT.create(ChannelService.class);
 
     @UiField
     UListElement msgs;
@@ -39,14 +40,14 @@ public class MsgPanel extends Composite {
         initWidget(ourUiBinder.createAndBindUi(this));
 
         appendMessage("Initial.");
-        Channel.getService("chat").getToken("channel_demo", new AsyncCallback<String>() {
+        channelService.getToken(new AsyncCallback<String>() {
             //skip
 
             @Override
-            public void onSuccess(String result) {
+            public void onSuccess(String token) {
                 appendMessage("get token");
 
-                chatChannel = new Channel(result);
+                chatChannel = new Channel(token);
                 chatChannel.addOpenHandler(new OpenEvent.OpenHandler() {
                     @Override
                     public void onOpen(OpenEvent openEvent) {

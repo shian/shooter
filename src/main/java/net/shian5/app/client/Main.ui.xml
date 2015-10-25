@@ -10,10 +10,7 @@
                 </td>
             </tr>
             <tr>
-                <td id="nameFieldContainer">
-                    <g:TextBox ui:field="nameField"/>
-                </td>
-                <td id="sendButtonContainer">
+                <td colspan="2" id="sendButtonContainer">
                     <g:Button ui:field="sendButton"/>
                 </td>
             </tr>

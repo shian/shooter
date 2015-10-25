@@ -10,20 +10,26 @@
         <servlet-name>greetServlet</servlet-name>
         <servlet-class>net.shian5.app.server.GreetingServiceImpl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Chat</servlet-name>
+        <servlet-class>net.shian5.app.server.ChatServiceImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>net.shian5.app.shooter ChannelService</servlet-name>
+        <servlet-class>net.shian5.app.server.ChannelServiceImpl</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>greetServlet</servlet-name>
         <url-pattern>/shooter/greet</url-pattern>
     </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Chat</servlet-name>
-        <servlet-class>net.shian5.app.server.ChatServiceImpl</servlet-class>
-    </servlet>
-
     <servlet-mapping>
         <servlet-name>Chat</servlet-name>
         <url-pattern>/shooter/chat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>net.shian5.app.shooter ChannelService</servlet-name>
+        <url-pattern>/shooter/channel</url-pattern>
     </servlet-mapping>
 
     <!-- Default page to serve -->

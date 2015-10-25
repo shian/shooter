@@ -22,24 +22,18 @@ import java.lang.reflect.Method;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
         GreetingService {
 
-    public String greetServer(String input) throws IllegalArgumentException {
-        // Verify that the input is valid.
-        if (!FieldVerifier.isValidName(input)) {
-            // If the input is not valid, throw an IllegalArgumentException back to
-            // the client.
-            throw new IllegalArgumentException(
-                    "Name must be at least 4 characters long");
+    public String greetServer(int tick) throws IllegalArgumentException {
+        String msg;
+        if (tick>0){
+            // behind
+            msg = String.format("You are %.3f seconds behind", (tick/1000.0));
+        } else {
+            // ahead
+            msg = String.format("You are %.3f seconds ahead", (-tick/1000.0));
         }
 
-        //String serverInfo = getServletContext().getServerInfo();
-        //String userAgent = getThreadLocalRequest().getHeader("User-Agent");
-
-        // Escape data from the client to avoid cross-site script vulnerabilities.
-        input = escapeHtml(input);
-        //userAgent = escapeHtml(userAgent);
-
         try {
-            sendToChannel("channel_demo", new ChatMessage("demo", input));
+            sendToChannel("shooter", new ChatMessage("server", msg));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (SerializationException e) {
@@ -51,20 +45,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
         return "OK";
     }
 
-    /**
-     * Escape an html string. Escaping data received from the client helps to
-     * prevent cross-site script vulnerabilities.
-     *
-     * @param html the html string to escape
-     * @return the escaped string
-     */
-    private String escapeHtml(String html) {
-        if (html == null) {
-            return null;
-        }
-        return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(
-                ">", "&gt;");
-    }
 
     interface MessageService {
         Message getMessage(Message msg);
